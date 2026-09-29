@@ -1,4 +1,7 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using UnityEditor.UIElements;
 
 namespace Assignment
 {
@@ -13,6 +16,13 @@ namespace Assignment
             int index = -1;
 
             // Your code here ...
+            for(int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == target)
+                {
+                    index = i;
+                    break;
+                }            }
             // ...
 
 
@@ -32,6 +42,18 @@ namespace Assignment
             int col = -1;
 
             // Your code here ...
+            for (int r = 0; r < array.GetLength(0); r++)
+            {
+                for (int c = 0; c < array.GetLength(1); c++)
+                {
+                    if (array[r,c] == target)
+                    {
+                        row = r;
+                        col = c;
+                        break;
+                    }
+                }
+            }
             // ...
 
             return new[] { row, col };
@@ -44,6 +66,25 @@ namespace Assignment
             int index = -1;
 
             // Your code here ...
+            int left = 0;
+            int right = array.Length - 1;
+            while (left <= right)
+            {
+                var mid = (left + right) / 2;
+                if (array[mid] == target)
+                {
+                    index = mid;
+                    break;
+                }
+                else if (array[mid] < target)
+                {
+                    left = mid + 1;
+                }
+                else if (array[mid] > target)
+                {
+                    right = mid - 1;
+                }
+            }
             // ...
 
             return index;
@@ -55,17 +96,72 @@ namespace Assignment
 
         public int[] AS01_FindFirstAndLastElementOfArray(int[] array, int target)
         {
-            throw new NotImplementedException();
+            int first = -1;
+            int last = -1;
+            int[] found;
+            // Your code here ...
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == target)
+                {
+                    if(first == -1)
+                    {
+                        first = i;
+                    }
+                    last = i;
+
+                }
+            }
+            if (first == -1)
+            {
+                found = new int[] {first};
+            }
+            else
+            {
+                found = new int[] {first,last};
+            }
+            // ...
+            return found;
         }
 
         public int AS02_FindMaxLessThan(int[] array, int target)
         {
-            throw new NotImplementedException();
+            int less = -1;
+            int found = -1;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] < target && array[i] > less)
+                {
+                    if(found == -1 || found > less)
+                    {
+                        less = i;
+                    }
+                }
+            }
+            if (less == -1)
+            {
+                found = -1;
+            }
+            else
+            {
+                found = array[less];
+            }
+
+            return found;
         }
 
         public int[] AS03_FindRange(int[] array, int min, int max)
         {
-            throw new NotImplementedException();
+            List<int> result = new List<int>();
+            for (int i = 0; i < array.Length;i++)
+            {
+                if(min <= array[i] && array[i] <= max)
+                {
+                    result.Add(array[i]);
+                }
+            }
+            int[] found = result.ToArray();
+            return found;
         }
 
         #endregion
